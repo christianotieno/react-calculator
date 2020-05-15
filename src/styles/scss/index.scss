@@ -26,5 +26,19 @@
   background-color: #858693;
 }
 
+.display {
+  width: auto;
+  display: flex;
+  color: #fff;
+  height: 100px;
+  font-size: 3em;
+  font-weight: bold;
+  position: relative;
+  align-content: flex-end;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
 
 
