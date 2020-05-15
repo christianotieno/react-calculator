@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
+class CalculatoClass extends React.Component {
+  render() {
+    return <h1>Hello world</h1>;
+  }
+}
+
 ReactDOM.render(
-  <h1>Calculator App</h1>,
-  document.getElementById('root')
-  );
+	<CalculatorClass />, 
+	document.getElementById('root')
+);
