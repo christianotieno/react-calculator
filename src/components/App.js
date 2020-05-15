@@ -11,10 +11,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { result } = this.state; 
+    const { result } = this.state;
     return (
       <div>
-        <Display result={result.toString()}/>
+        <Display result={result.toString()} />
         <ButtonPanel />
       </div>
     );
