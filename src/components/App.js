@@ -1,6 +1,8 @@
 import React from 'react';
 import Display from './Display';
+import '../styles/css/index.css';
 import ButtonPanel from './ButtonPanel';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class App extends React.Component {
   render() {
     const { result } = this.state;
     return (
-      <div>
+      <div className="app">
         <Display result={result.toString()} />
         <ButtonPanel />
       </div>
