@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: 0,
+      result: '0',
     };
   }
 
@@ -16,8 +16,10 @@ class App extends React.Component {
     const { result } = this.state;
     return (
       <div className="app">
-        <Display result={result.toString()} />
-        <ButtonPanel />
+        <div className="calc-container">
+          <Display result={result} />
+          <ButtonPanel />
+        </div>
       </div>
     );
   }

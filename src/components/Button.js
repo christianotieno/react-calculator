@@ -2,16 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
-  const { name } = props;
-  const { color } = props;
-  const { wide } = props;
-  const { bottomRightRadius } = props;
-  const { bottomLeftRadius } = props;
+  const {
+    name,
+    wide,
+    color,
+    fontSize,
+    borderColor,
+    bottomLeftRadius,
+    bottomRightRadius,
+  } = props;
+
   const styles = {
-    flexBasis: wide ? '50%' : '25%',
+    fontSize,
+    borderColor,
     backgroundColor: color,
-    borderBottomRightRadius: bottomRightRadius ? 10 : 0,
-    borderBottomLeftRadius: bottomLeftRadius ? 10 : 0,
+    flexBasis: wide ? '50%' : '25%',
+    borderBottomLeftRadius: bottomLeftRadius ? 30 : 0,
+    borderBottomRightRadius: bottomRightRadius ? 30 : 0,
   };
 
   return (
@@ -22,16 +29,20 @@ const Button = props => {
 };
 
 Button.propTypes = {
-  name: PropTypes.string.isRequired,
-  color: PropTypes.string,
   wide: PropTypes.bool,
+  color: PropTypes.string,
+  fontSize: PropTypes.number,
+  borderColor: PropTypes.string,
   bottomLeftRadius: PropTypes.bool,
   bottomRightRadius: PropTypes.bool,
+  name: PropTypes.string.isRequired,
 };
 
 Button.defaultProps = {
-  color: '#fb8B24',
   wide: false,
+  fontSize: 50,
+  color: '#e0e0e0',
+  borderColor: '#858693',
   bottomLeftRadius: false,
   bottomRightRadius: false,
 };

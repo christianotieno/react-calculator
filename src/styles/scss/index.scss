@@ -5,22 +5,18 @@
 }
 
 #root {
-  height: 80vh;
   display: flex;
-  margin-top: 10%;
   border-radius: 35px;
   align-items: center;
   justify-content: center;
 }
-.app {
-  width: 50vw;
-  display: flex;
-  border-radius: 35px;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  border: 10px solid #000;
+.calc-container {
+  width: 700px;
+  margin: 12em auto;
+  border-radius: 30px;
+  border: 1px solid #eee;
   background-color: #858693;
+  box-shadow: 0 0 40px 4px #000;
 }
 
 .display {
@@ -28,36 +24,20 @@
   display: flex;
   color: #fff;
   height: 100px;
-  font-size: 3em;
+  font-size: 4em;
+  padding: 0 20px;
   font-weight: bold;
   position: relative;
-  align-content: flex-end;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  justify-content: flex-end;
 }
 
 .btn-panel {
   display: flex;
-  margin: 0 auto;
-  border-bottom: 10px;
   flex-direction: column;
   box-sizing: border-box;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px; 
 }
 
 .btn-group {
   display: flex;
   height: 100px;
-  width: 700px;
 }
-
-.btn {
-  height: 100px;
-  font-size: 30px;
-  padding-top:35px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-
