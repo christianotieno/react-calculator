@@ -1,6 +1,10 @@
-# react-calculator
+# React Project - Calculator
 
 This is a calculator built with the React Javascrupt framework.
+
+|App Name|Gif|
+|:---:|:---:|
+|React Calculator|![gif](./public/Calculator_React_App_GoogleChrome.gif)|
 
 ## Built With
 
