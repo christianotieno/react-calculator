@@ -12,24 +12,26 @@ class App extends React.Component {
       total: null,
       next: null,
       operation: null,
-      current: null,
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(buttonName) {
-    const state = Calculate(this.state, buttonName);
-    this.setState(state);
+    this.setState(state => (
+      Calculate(state, buttonName)
+    ));
   }
 
   render() {
-    const { current } = this.state;
+    const { total, next, operation } = this.state;
     return (
-      <div className="app">
+      <div>
+        <h1 className="header">
+          React Calculator
+          <span className="operation">{operation}</span>
+        </h1>
         <div className="calc-container">
-          <Display result={current} />
-          <ButtonPanel clickHandler={this.handleClick} />
+          <Display result={next || total || 0} />
+          <ButtonPanel clickHandler={buttonName => this.handleClick(buttonName)} />
         </div>
       </div>
     );
