@@ -6,6 +6,7 @@ const Button = props => {
     name,
     wide,
     color,
+    onClick,
     fontSize,
     borderColor,
     bottomLeftRadius,
@@ -21,8 +22,17 @@ const Button = props => {
     borderBottomRightRadius: bottomRightRadius ? 30 : 0,
   };
 
+  const handleClick = () => {
+    onClick(name);
+  };
+
   return (
-    <div className="btn" style={styles}>
+    // eslint-disable-next-line
+    <div 
+      className="btn"
+      style={styles}
+      onClick={handleClick}
+    >
       {name}
     </div>
   );
@@ -36,6 +46,7 @@ Button.propTypes = {
   bottomLeftRadius: PropTypes.bool,
   bottomRightRadius: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 Button.defaultProps = {
