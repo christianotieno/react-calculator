@@ -19,6 +19,7 @@ class App extends React.Component {
     this.setState(state => (
       Calculate(state, buttonName)
     ));
+    return true;
   }
 
   render() {
@@ -30,7 +31,7 @@ class App extends React.Component {
           <span className="operation">{operation}</span>
         </h1>
         <div className="calc-container">
-          <Display result={next || total || 0} />
+          <Display result={next || total || '0'} />
           <ButtonPanel clickHandler={buttonName => this.handleClick(buttonName)} />
         </div>
       </div>
