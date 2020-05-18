@@ -24,7 +24,6 @@ const Button = props => {
 
   const handleClick = () => {
     onClick(name);
-    return true;
   };
 
   return (

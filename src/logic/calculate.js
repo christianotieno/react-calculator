@@ -68,9 +68,9 @@ const Calculate = (data, buttonName) => {
 
     if (len > 0) {
       const nums = data.next.split(/\+|-|x|÷|%/);
-      const op = data.operation.charAt(0);
+      const operand = data.operation.charAt(0);
       if (data.next.startsWith('-')) {
-        const result = Operate(`-${nums[1]}`, nums[2], op);
+        const result = Operate(`-${nums[1]}`, nums[2], operand);
         if (syntaxCheck(result)) {
           return syntaxCheck(result);
         }
@@ -80,7 +80,7 @@ const Calculate = (data, buttonName) => {
           operation: buttonName,
         };
       }
-      const result = Operate(nums[0], nums[1], op);
+      const result = Operate(nums[0], nums[1], operand);
       if (syntaxCheck(result)) {
         return syntaxCheck(result);
       }

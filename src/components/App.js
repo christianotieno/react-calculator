@@ -19,7 +19,6 @@ class App extends React.Component {
     this.setState(state => (
       Calculate(state, buttonName)
     ));
-    return true;
   }
 
   render() {

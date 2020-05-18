@@ -1,29 +1,34 @@
+// import syntaxCheck from './calculate';
+
 const Big = require('big.js');
 
 const Operate = (numberOne, numberTwo, operation) => {
-  const num1 = Big(numberOne);
-  const num2 = Big(numberTwo);
-
-  if (operation === '+') {
-    return num1.plus(num2).toString();
-  } if (operation === '-') {
-    return num1.minus(num2).toString();
-  } if (operation === 'x') {
-    return num1.times(num2).toString();
-  } if (operation === '÷') {
-    if (num1 === 0 || num2 === 0) {
-      return 0;
+  try {
+    const num1 = Big(numberOne);
+    const num2 = Big(numberTwo);
+    let result;
+    if (operation === '+') {
+      result = num1.plus(num2);
+    } if (operation === '-') {
+      result = num1.minus(num2);
+    } if (operation === 'x') {
+      result = num1.times(num2);
+    } if (operation === '÷') {
+      result = num1.div(num2);
+    } if (operation === '+/-') {
+      result = num1.times(-1);
+    } if (operation === '%') {
+      if (num2 !== '0') {
+        result = num1.times(num2.div(100));
+      }
+      result = num1.div(100);
     }
-    return num1.div(num2).toString();
-  } if (operation === '+/-') {
-    return num1.times(-1).toString();
-  } if (operation === '%') {
-    if (num2 !== '0') {
-      return num1.times(num2.div(100)).toString();
-    }
-    return num1.div(100).toString();
+    const len = result.c.length;
+    if (len > 20) num1.c.length = 20;
+    return result.toString();
+  } catch (e) {
+    return 'syntax error:divide';
   }
-  throw Error('Error');
 };
 
 export default Operate;
