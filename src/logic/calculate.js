@@ -19,8 +19,7 @@ const Calculate = (data, buttonName) => {
 
   if (checkNumber(buttonName)) {
     return {
-      next: (data.next || '')
-      + buttonName,
+      next: (data.next || '') + buttonName,
     };
   }
 
@@ -44,33 +43,47 @@ const Calculate = (data, buttonName) => {
     }
   }
 
-  if (checkOperator(buttonName)) {
-    if (!!data.operation
-      && !checkOperator(
-        data.next.charAt(data.next.length - 1),
-      )) {
-      const op = data.operation.charAt(
-        data.operation.length - 1,
-      );
-      const nums = data.next.split(
-        /\+|-|x|÷|%/,
-      );
+  const syntaxCheck = message => {
+    if (message.includes('Syntax Error')) {
+      return {
+        total: message,
+        next: null,
+        operation: null,
+      };
+    }
+    return '';
+  };
 
-      if ((
-        data.operation.startsWith('n'))
-        || data.next.startsWith('-')) {
-        const result = Operate(
-          `-${nums[1]}`, nums[2], op,
-        );
+
+  if (checkOperator(buttonName)) {
+    if (checkOperator(
+      data.next.charAt(data.next.length - 1),
+    )) {
+      return {};
+    }
+    let len;
+    if (data.operation) {
+      len = data.operation.length;
+    }
+
+    if (len > 0) {
+      const nums = data.next.split(/\+|-|x|÷|%/);
+      const operand = data.operation.charAt(0);
+      if (data.next.startsWith('-')) {
+        const result = Operate(`-${nums[1]}`, nums[2], operand);
+        if (syntaxCheck(result)) {
+          return syntaxCheck(result);
+        }
         return {
           total: result,
           next: result + buttonName,
           operation: buttonName,
         };
       }
-      const result = Operate(
-        nums[0], nums[1], op,
-      );
+      const result = Operate(nums[0], nums[1], operand);
+      if (syntaxCheck(result)) {
+        return syntaxCheck(result);
+      }
       return {
         total: result,
         next: result + buttonName,
@@ -78,43 +91,38 @@ const Calculate = (data, buttonName) => {
       };
     }
 
-    if (!checkOperator(
+    return {
+      next: data.next + buttonName,
+      operation: (data.operation || '') + buttonName,
+    };
+  }
+
+
+  if ((buttonName === '.')) {
+    if (checkOperator(
       data.next.charAt(data.next.length - 1),
-    )) {
-      return {
-        next: data.next + buttonName,
-        operation: (data.operation || '') + buttonName,
-      };
+    )
+    || data.next.endsWith('.')) {
+      return {};
     }
+    return {
+      next: data.next + buttonName,
+    };
+  }
 
-
-    if ((buttonName === '.')) {
-      if (checkOperator(
-        data.next.charAt(data.next.length - 1),
-      )
-        || data.next.endsWith('.')) {
-        return {};
-      }
-      return {
-        next: data.next + buttonName,
-      };
-    }
-
-    if (buttonName === '+/-') {
-      if ((!!data.operation
-        && data.operation.startsWith('n'))
-        && data.next.length < 28) {
-        return {
-          next: data.next.slice(1),
-          operation: data.operation.slice(1),
-        };
-      }
-    }
-
+  if (buttonName === '+/-') {
     if (!!data.next
-      && data.next.startsWith('-')) {
+      && data.next.startsWith('-')
+      && !!data.total
+      && data.total.startsWith('-')) {
       return {
         total: data.total.slice(1),
+        next: data.next.slice(1),
+      };
+    }
+
+    if (!!data.next && data.next.startsWith('-')) {
+      return {
         next: data.next.slice(1),
       };
     }
@@ -122,13 +130,11 @@ const Calculate = (data, buttonName) => {
     if (!data.next) {
       return {
         next: `-${0}`,
-        operation: 'n',
       };
     }
 
     return {
       next: `-${data.next}`,
-      operation: `n${data.operation || ''}`,
     };
   }
 
@@ -138,25 +144,25 @@ const Calculate = (data, buttonName) => {
     )) {
       return {};
     }
-    const op = data.operation.charAt(
-      data.operation.length - 1,
-    );
-    const nums = data.next.split(
-      /\+|-|x|÷|%/,
-    );
 
-    if (data.operation.startsWith('n')
-    || data.next.startsWith('-')) {
-      const result = Operate(
-        `-${nums[1]}`, nums[2], op,
-      );
+    const operand = data.operation.charAt(0);
+    const numerical = data.next.split(/\+|-|x|÷|%/);
+
+    if (data.next.startsWith('-')) {
+      const result = Operate(`-${numerical[1]}`, numerical[2], operand);
+      if (syntaxCheck(result)) {
+        return syntaxCheck(result);
+      }
       return {
         total: result,
         next: result,
         operation: null,
       };
     }
-    const result = Operate(nums[0], nums[1], op);
+    const result = Operate(numerical[0], numerical[1], operand);
+    if (syntaxCheck(result)) {
+      return syntaxCheck(result);
+    }
     return {
       total: result,
       next: result,
@@ -165,4 +171,5 @@ const Calculate = (data, buttonName) => {
   }
   return {};
 };
+
 export default Calculate;
